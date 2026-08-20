@@ -1,0 +1,770 @@
+*{
+    box-sizing:border-box;
+    font-family:
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+
+
+html,
+body{
+
+    width:100%;
+    height:100%;
+    margin:0;
+
+    overflow:hidden;
+
+    background:
+    radial-gradient(circle at top,#1f2937,#020617);
+
+    color:white;
+
+}
+
+
+
+
+
+/* ==========================
+   LAYOUT UTAMA
+========================== */
+
+
+.match-screen{
+
+    width:100vw;
+    height:100vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    aspect-ratio:16/9;
+
+}
+
+
+
+
+
+/* ==========================
+   HEADER
+========================== */
+
+
+header{
+
+    height:12vh;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:
+
+    linear-gradient(
+    90deg,
+    #991b1b,
+    #111827,
+    #1e40af
+    );
+
+
+    border-bottom:
+
+    3px solid #facc15;
+
+}
+
+
+
+header h1{
+
+    margin:0;
+
+    font-size:
+
+    clamp(25px,3vw,55px);
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+}
+
+
+
+header p{
+
+    margin:5px;
+
+    font-size:
+
+    clamp(12px,1.2vw,22px);
+
+    letter-spacing:8px;
+
+    color:#facc15;
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   AREA SCORE
+========================== */
+
+
+.score-area{
+
+
+    flex:1;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+
+    1fr
+    1.15fr
+    1fr;
+
+
+
+    gap:25px;
+
+
+    padding:
+
+    20px 40px;
+
+
+
+    align-items:center;
+
+
+}
+
+
+
+
+
+/* ==========================
+   TIM
+========================== */
+
+
+.team-wrapper{
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+
+}
+
+
+
+.team-card{
+
+
+    width:100%;
+
+
+    height:60vh;
+
+
+    background:
+
+    rgba(15,23,42,.95);
+
+
+    border-radius:25px;
+
+
+    display:flex;
+
+
+    flex-direction:column;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    padding:25px;
+
+
+}
+
+
+
+
+
+.team-a{
+
+    border:
+
+    5px solid #ef4444;
+
+    box-shadow:
+
+    0 0 30px #ef4444;
+
+}
+
+
+
+.team-b{
+
+    border:
+
+    5px solid #2563eb;
+
+
+    box-shadow:
+
+    0 0 30px #2563eb;
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   INPUT NAMA TIM
+========================== */
+
+
+.team-card input{
+
+
+    width:90%;
+
+
+    padding:15px;
+
+
+    text-align:center;
+
+
+    border:none;
+
+
+    border-radius:15px;
+
+
+    font-size:
+
+
+    clamp(18px,2vw,38px);
+
+
+    font-weight:900;
+
+
+    text-transform:uppercase;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   ANGKA SCORE
+========================== */
+
+
+.score{
+
+
+    flex:1;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    width:100%;
+
+
+    font-size:
+
+
+    clamp(100px,18vw,280px);
+
+
+    font-weight:900;
+
+
+    line-height:1;
+
+
+
+}
+
+
+
+
+.team-a .score{
+
+
+    color:#f87171;
+
+}
+
+
+
+.team-b .score{
+
+
+    color:#60a5fa;
+
+}
+
+
+
+
+
+
+
+
+/* ==========================
+   BUTTON
+========================== */
+
+
+.button-area{
+
+
+    margin-top:15px;
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+}
+
+
+
+
+
+button{
+
+
+    border:none;
+
+
+    border-radius:15px;
+
+
+    padding:
+
+    15px 30px;
+
+
+    font-size:
+
+    clamp(16px,1.5vw,28px);
+
+
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+    color:white;
+
+
+    background:
+
+    linear-gradient(
+    45deg,
+    #dc2626,
+    #f59e0b
+    );
+
+
+
+}
+
+
+
+button:hover{
+
+
+    transform:scale(1.05);
+
+
+}
+
+
+
+
+
+
+/* ==========================
+   PANEL TENGAH
+========================== */
+
+
+.center{
+
+
+    background:
+
+    rgba(15,23,42,.95);
+
+
+    padding:25px;
+
+
+    border-radius:25px;
+
+
+    text-align:center;
+
+
+}
+
+
+
+.center h2{
+
+
+    margin-top:0;
+
+
+    font-size:
+
+
+    clamp(20px,2vw,35px);
+
+
+}
+
+
+
+
+
+
+table{
+
+
+    width:100%;
+
+
+    border-collapse:collapse;
+
+
+    font-size:
+
+
+    clamp(12px,1.2vw,22px);
+
+
+}
+
+
+
+
+th{
+
+
+    background:#991b1b;
+
+
+    padding:12px;
+
+
+}
+
+
+
+td{
+
+
+    border:
+
+    2px solid white;
+
+
+    padding:12px;
+
+
+}
+
+
+
+
+
+
+
+.match-score{
+
+    margin-top:15px;
+
+    font-size:
+    clamp(70px,8vw,140px);
+
+    color:#facc15;
+
+    font-weight:900;
+
+    letter-spacing:10px;
+
+}
+
+#currentSet{
+
+    font-size:
+    clamp(50px,6vw,120px);
+
+    font-weight:900;
+
+    color:white;
+
+    letter-spacing:5px;
+
+    margin:20px 0;
+
+    text-transform:uppercase;
+
+}
+
+
+.status{
+
+
+    margin-top:15px;
+
+
+    padding:10px;
+
+
+    border-radius:10px;
+
+
+    background:#374151;
+
+
+    font-size:20px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   CONTROL
+========================== */
+
+
+.control-panel{
+
+
+    text-align:center;
+
+
+    padding:10px;
+
+
+}
+
+
+
+
+
+.control-panel button{
+
+
+    background:#334155;
+
+
+    margin:5px;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   FOOTER
+========================== */
+
+
+footer{
+
+
+    height:5vh;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    background:#020617;
+
+
+    font-size:
+
+
+    clamp(12px,1.2vw,22px);
+
+
+    color:#facc15;
+
+
+}
+
+
+
+
+
+
+
+/* ==========================
+   FULLSCREEN PORTRAIT 9:16
+========================== */
+
+
+@media(max-aspect-ratio:1/1){
+
+
+
+.match-screen{
+
+
+    aspect-ratio:9/16;
+
+}
+
+
+
+.score-area{
+
+
+    grid-template-columns:1fr;
+
+
+    overflow-y:auto;
+
+
+}
+
+
+
+.team-card{
+
+
+    height:35vh;
+
+
+}
+
+
+.score{
+
+
+    font-size:120px;
+
+}
+
+
+
+}
+
+
+
+
+
+
+/* ==========================
+   PROJECTOR 4K
+========================== */
+
+
+@media(min-width:2000px){
+
+
+
+header h1{
+
+
+    font-size:70px;
+
+
+}
+
+
+
+.score{
+
+
+    font-size:350px;
+
+
+}
+
+
+
+table{
+
+
+    font-size:30px;
+
+
+}
+
+
+}

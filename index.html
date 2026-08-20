@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>
+SEKARDANGAN CUP VOLLEYBALL PRO MATCH SYSTEM
+</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="match-screen">
+
+
+<header>
+
+<h1>
+SEKARDANGAN CUP - VOLI KEBER PRIA
+</h1>
+
+<p>
+DALAM RANGKA HUT KE-81 KEMERDEKAAN REPUBLIK INDONESIA
+</p>
+
+</header>
+
+
+
+<section class="score-area">
+
+
+
+<!-- =====================
+     TIM A
+===================== -->
+
+
+<div class="team-wrapper">
+
+
+<div class="team-card team-a">
+
+
+<input 
+id="teamA"
+value="TIM MERAH"
+oninput="update()"
+>
+
+
+<div 
+class="score"
+id="scoreA">
+0
+</div>
+
+
+</div>
+
+
+
+<div class="button-area">
+
+<button onclick="point('A')">
++ POINT
+</button>
+
+
+<button onclick="minus('A')">
+−
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- =====================
+     REKAP TENGAH
+===================== -->
+
+
+<div class="center">
+
+
+<h2>
+HASIL PERTANDINGAN
+</h2>
+
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>
+SET
+</th>
+
+
+<th id="headA">
+TIM MERAH
+</th>
+
+
+<th id="headB">
+TIM PUTIH
+</th>
+
+
+<th>
+PEMENANG
+</th>
+
+
+</tr>
+
+</thead>
+
+
+
+<tbody id="history">
+
+
+<tr>
+
+<td colspan="4">
+Belum ada set
+</td>
+
+
+</tr>
+
+
+</tbody>
+
+
+</table>
+
+
+
+
+
+<h3 id="currentSet">
+
+SET 1
+</h3>
+
+
+
+<div class="match-score">
+
+
+<span id="setA">
+0
+</span>
+
+
+-
+
+<span id="setB">
+0
+</span>
+
+
+</div>
+
+
+
+<div class="status"
+id="statusMatch">
+
+NORMAL PLAY
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- =====================
+     TIM B
+===================== -->
+
+
+<div class="team-wrapper">
+
+
+<div class="team-card team-b">
+
+
+<input 
+id="teamB"
+value="TIM PUTIH"
+oninput="update()"
+>
+
+
+
+<div 
+class="score"
+id="scoreB">
+
+0
+
+</div>
+
+
+
+</div>
+
+
+
+
+<div class="button-area">
+
+
+<button onclick="point('B')">
++ POINT
+</button>
+
+
+<button onclick="minus('B')">
+−
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<!-- =====================
+CONTROL
+===================== -->
+
+
+<div class="control-panel">
+
+
+<button onclick="switchCourt()">
+
+🔄 TUKAR POSISI
+
+</button>
+
+
+
+<button onclick="resetMatch()">
+
+⟳ RESET MATCH
+
+</button>
+
+
+
+
+<button onclick="fullscreen()">
+
+⛶ FULL SCREEN
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+<footer>
+
+
+BEST OF 3 SET  
+|
+SET 1-3 = 25 POINT  
+|
+DEUCE SYSTEM | SELAMAT BERTANDING | SEKARDANGAN BERSATU
+
+
+</footer>
+
+
+
+</div>
+
+
+
+<script src="app.js"></script>
+
+
+</body>
+
+</html>
