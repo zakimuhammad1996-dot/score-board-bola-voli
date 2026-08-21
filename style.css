@@ -11,26 +11,24 @@
 html,
 body{
 
+    margin:0;
     width:100%;
     height:100%;
-    margin:0;
-
-    overflow:hidden;
 
     background:
-    radial-gradient(circle at top,#1f2937,#020617);
+    radial-gradient(
+        circle at top,
+        #1e293b,
+        #020617
+    );
 
     color:white;
+
+    overflow:hidden;
 
 }
 
 
-
-
-
-/* ==========================
-   LAYOUT UTAMA
-========================== */
 
 
 .match-screen{
@@ -39,10 +37,7 @@ body{
     height:100vh;
 
     display:flex;
-
     flex-direction:column;
-
-    aspect-ratio:16/9;
 
 }
 
@@ -50,70 +45,169 @@ body{
 
 
 
-/* ==========================
-   HEADER
-========================== */
+
+
+/* ================= HEADER ================= */
 
 
 header{
 
-    height:12vh;
+
+    height:15vh;
 
     display:flex;
 
-    flex-direction:column;
-
-    justify-content:center;
+    justify-content:space-between;
 
     align-items:center;
+
+
+    padding:20px 40px;
 
 
     background:
 
     linear-gradient(
-    90deg,
-    #991b1b,
-    #111827,
-    #1e40af
+        90deg,
+        #991b1b,
+        #111827,
+        #1d4ed8
     );
 
 
     border-bottom:
 
-    3px solid #facc15;
+    4px solid #facc15;
 
 }
 
 
 
-header h1{
+.title-area h1{
+
 
     margin:0;
+
+
+    font-size:
+
+    clamp(35px,4vw,70px);
+
+
+    font-weight:900;
+
+
+    letter-spacing:5px;
+
+
+}
+
+
+
+.title-area h2{
+
+
+    margin:0;
+
+
+    font-size:
+
+    clamp(22px,2vw,40px);
+
+
+}
+
+
+
+.title-area p{
+
+
+    margin:5px 0;
+
+
+    color:#facc15;
+
+
+    letter-spacing:3px;
+
+
+}
+
+
+
+
+
+
+
+/* CLOCK */
+
+
+.clock-area{
+
+
+    display:flex;
+
+
+    gap:20px;
+
+
+}
+
+
+
+.clock-box{
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
+
+    padding:
+
+    15px 30px;
+
+
+    border-radius:20px;
+
+
+    text-align:center;
+
+
+    min-width:180px;
+
+
+}
+
+
+
+.clock-box span{
+
+
+    display:block;
+
+
+    color:#fde68a;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+.clock-box strong{
+
 
     font-size:
 
     clamp(25px,3vw,55px);
 
-    font-weight:900;
-
-    letter-spacing:2px;
-
-}
-
-
-
-header p{
-
-    margin:5px;
-
-    font-size:
-
-    clamp(12px,1.2vw,22px);
-
-    letter-spacing:8px;
 
     color:#facc15;
 
+
 }
 
 
@@ -122,12 +216,105 @@ header p{
 
 
 
-/* ==========================
-   AREA SCORE
-========================== */
 
 
-.score-area{
+/* ================= SETTING ================= */
+
+
+
+.setting-panel{
+
+
+    height:10vh;
+
+
+    display:flex;
+
+
+    justify-content:center;
+
+
+    align-items:center;
+
+
+    gap:25px;
+
+
+}
+
+
+
+.setting-box{
+
+
+    background:#111827;
+
+
+    padding:10px 20px;
+
+
+    border-radius:15px;
+
+
+    border:
+
+    1px solid #334155;
+
+
+}
+
+
+
+.setting-box label{
+
+
+    display:block;
+
+
+    color:#facc15;
+
+
+    font-weight:bold;
+
+
+    font-size:14px;
+
+
+}
+
+
+
+.setting-box input,
+.setting-box select{
+
+
+    padding:8px;
+
+
+    font-size:18px;
+
+
+    font-weight:bold;
+
+
+    border-radius:10px;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= SCORE ================= */
+
+
+
+.score-container{
 
 
     flex:1;
@@ -139,10 +326,7 @@ header p{
     grid-template-columns:
 
 
-    1fr
-    1.15fr
-    1fr;
-
+    1fr 1.15fr 1fr;
 
 
     gap:25px;
@@ -153,52 +337,26 @@ header p{
     20px 40px;
 
 
-
-    align-items:center;
-
-
 }
 
 
 
 
 
-/* ==========================
-   TIM
-========================== */
 
 
-.team-wrapper{
+.team-box{
 
 
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
+    position:relative;
 
 
-}
-
-
-
-.team-card{
-
-
-    width:100%;
-
-
-    height:60vh;
+    border-radius:30px;
 
 
     background:
 
     rgba(15,23,42,.95);
-
-
-    border-radius:25px;
 
 
     display:flex;
@@ -220,32 +378,35 @@ header p{
 
 
 
+.red-team{
 
-
-.team-a{
 
     border:
 
-    5px solid #ef4444;
+    6px solid #ef4444;
+
 
     box-shadow:
 
-    0 0 30px #ef4444;
+    0 0 40px rgba(239,68,68,.7);
+
 
 }
 
 
 
-.team-b{
+.blue-team{
+
 
     border:
 
-    5px solid #2563eb;
+    6px solid #2563eb;
 
 
     box-shadow:
 
-    0 0 30px #2563eb;
+    0 0 40px rgba(37,99,235,.7);
+
 
 }
 
@@ -255,33 +416,27 @@ header p{
 
 
 
-/* ==========================
-   INPUT NAMA TIM
-========================== */
-
-
-.team-card input{
+.team-box input{
 
 
     width:90%;
 
 
-    padding:15px;
-
-
     text-align:center;
 
 
-    border:none;
+    padding:15px;
 
 
     border-radius:15px;
 
 
+    border:none;
+
+
     font-size:
 
-
-    clamp(18px,2vw,38px);
+    clamp(20px,2vw,40px);
 
 
     font-weight:900;
@@ -297,16 +452,13 @@ header p{
 
 
 
-
-/* ==========================
-   ANGKA SCORE
-========================== */
-
-
-.score{
+.score-number{
 
 
     flex:1;
+
+
+    width:100%;
 
 
     display:flex;
@@ -318,41 +470,33 @@ header p{
     align-items:center;
 
 
-    width:100%;
-
-
     font-size:
 
-
-    clamp(100px,18vw,280px);
+    clamp(120px,18vw,300px);
 
 
     font-weight:900;
 
 
-    line-height:1;
-
-
-
 }
 
 
 
-
-.team-a .score{
+.red-team .score-number{
 
 
     color:#f87171;
 
+
 }
 
 
-
-.team-b .score{
+.blue-team .score-number{
 
 
     color:#60a5fa;
 
+
 }
 
 
@@ -362,26 +506,72 @@ header p{
 
 
 
-/* ==========================
-   BUTTON
-========================== */
+/* SERVIS */
 
 
-.button-area{
+.serve-indicator{
 
 
-    margin-top:15px;
+    position:absolute;
+
+
+    right:25px;
+
+
+    bottom:25px;
+
+
+    padding:
+
+    12px 20px;
+
+
+    border-radius:20px;
+
+
+    background:#facc15;
+
+
+    color:#111827;
+
+
+    font-weight:900;
+
+
+    opacity:0;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+.serve-indicator.active{
+
+
+    opacity:1;
+
+
+}
+
+
+
+
+
+
+
+.button-group{
 
 
     display:flex;
 
 
-    gap:15px;
+    gap:10px;
 
 
 }
-
-
 
 
 
@@ -399,15 +589,13 @@ button{
     15px 30px;
 
 
-    font-size:
-
-    clamp(16px,1.5vw,28px);
-
-
-    font-weight:bold;
-
-
     cursor:pointer;
+
+
+    font-size:20px;
+
+
+    font-weight:900;
 
 
     color:white;
@@ -416,11 +604,10 @@ button{
     background:
 
     linear-gradient(
-    45deg,
-    #dc2626,
-    #f59e0b
+        45deg,
+        #dc2626,
+        #f59e0b
     );
-
 
 
 }
@@ -440,12 +627,14 @@ button:hover{
 
 
 
-/* ==========================
-   PANEL TENGAH
-========================== */
 
 
-.center{
+
+/* ================= CENTER ================= */
+
+
+
+.center-box{
 
 
     background:
@@ -453,10 +642,10 @@ button:hover{
     rgba(15,23,42,.95);
 
 
+    border-radius:30px;
+
+
     padding:25px;
-
-
-    border-radius:25px;
 
 
     text-align:center;
@@ -466,148 +655,156 @@ button:hover{
 
 
 
-.center h2{
+
+.center-box h2{
 
 
-    margin-top:0;
+    font-size:35px;
+
+
+}
+
+
+
+.set-display{
 
 
     font-size:
 
+    clamp(80px,8vw,150px);
 
-    clamp(20px,2vw,35px);
-
-
-}
-
-
-
-
-
-
-table{
-
-
-    width:100%;
-
-
-    border-collapse:collapse;
-
-
-    font-size:
-
-
-    clamp(12px,1.2vw,22px);
-
-
-}
-
-
-
-
-th{
-
-
-    background:#991b1b;
-
-
-    padding:12px;
-
-
-}
-
-
-
-td{
-
-
-    border:
-
-    2px solid white;
-
-
-    padding:12px;
-
-
-}
-
-
-
-
-
-
-
-.match-score{
-
-    margin-top:15px;
-
-    font-size:
-    clamp(70px,8vw,140px);
 
     color:#facc15;
 
+
     font-weight:900;
 
-    letter-spacing:10px;
 
 }
+
+
 
 #currentSet{
 
+
     font-size:
-    clamp(50px,6vw,120px);
 
-    font-weight:900;
+    clamp(40px,5vw,90px);
 
+
+    margin:10px;
+
+
+}
+
+
+
+
+
+
+
+#status{
+
+
+    background:#334155;
+
+
+    border-radius:15px;
+
+
+    padding:15px;
+
+
+    font-size:25px;
+
+
+    font-weight:bold;
+
+
+}
+
+
+
+
+
+
+
+
+
+/* ================= TABLE MATRIX ================= */
+
+
+
+.history-table{
+    width:100%;
+    margin-top:25px;
+    border-collapse:separate;
+    border-spacing:0;
+    background:rgba(2,6,23,.9);
     color:white;
-
-    letter-spacing:5px;
-
-    margin:20px 0;
-
-    text-transform:uppercase;
-
-}
-
-
-.status{
-
-
-    margin-top:15px;
-
-
-    padding:10px;
-
-
-    border-radius:10px;
-
-
-    background:#374151;
-
-
-    font-size:20px;
-
-
+    overflow:hidden;
+    border:3px solid #22d3ee;
+    box-shadow:0 0 10px #22d3ee,0 0 25px rgba(34,211,238,.7),inset 0 0 20px rgba(34,211,238,.15);
+    border-radius:12px;
 }
 
 
 
+.history-table th{
+    background:linear-gradient(180deg,#0f172a,#111827);
+    color:#f8fafc;
+    border:1px solid rgba(34,211,238,.8);
+    padding:15px;
+    font-size:clamp(18px,2vw,30px);
+    text-shadow:0 0 8px #22d3ee;
+}
+
+
+
+.history-table td{
+    border:1px solid rgba(34,211,238,.65);
+    padding:18px;
+    font-size:clamp(18px,2vw,30px);
+    font-weight:900;
+    background:rgba(15,23,42,.75);
+    color:#ffffff;
+    box-shadow:inset 0 0 10px rgba(34,211,238,.12);
+}
 
 
 
 
-/* ==========================
-   CONTROL
-========================== */
+
+
+.history-table td:first-child,
+.history-table th:first-child{
+
+
+    text-align:left;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+/* ================= CONTROL ================= */
+
 
 
 .control-panel{
 
 
+    height:8vh;
+
+
     text-align:center;
-
-
-    padding:10px;
 
 
 }
@@ -622,9 +819,6 @@ td{
     background:#334155;
 
 
-    margin:5px;
-
-
 }
 
 
@@ -632,16 +826,16 @@ td{
 
 
 
-
-/* ==========================
-   FOOTER
-========================== */
-
-
 footer{
 
 
     height:5vh;
+
+
+    background:#020617;
+
+
+    color:#facc15;
 
 
     display:flex;
@@ -653,16 +847,7 @@ footer{
     align-items:center;
 
 
-    background:#020617;
-
-
-    font-size:
-
-
-    clamp(12px,1.2vw,22px);
-
-
-    color:#facc15;
+    font-size:20px;
 
 
 }
@@ -673,50 +858,62 @@ footer{
 
 
 
-/* ==========================
-   FULLSCREEN PORTRAIT 9:16
-========================== */
+
+/* RESPONSIVE */
 
 
-@media(max-aspect-ratio:1/1){
+@media(max-width:1100px){
+
+
+body{
+
+overflow:auto;
+
+}
+
+
+
+header{
+
+
+    flex-direction:column;
+
+
+    height:auto;
+
+
+}
+
+
+
+.setting-panel{
+
+
+    flex-wrap:wrap;
+
+
+    height:auto;
+
+
+}
+
+
+
+.score-container{
+
+
+    grid-template-columns:1fr;
+
+
+}
 
 
 
 .match-screen{
 
 
-    aspect-ratio:9/16;
+    height:auto;
 
-}
-
-
-
-.score-area{
-
-
-    grid-template-columns:1fr;
-
-
-    overflow-y:auto;
-
-
-}
-
-
-
-.team-card{
-
-
-    height:35vh;
-
-
-}
-
-
-.score{
-
-
-    font-size:120px;
 
 }
 
@@ -724,47 +921,793 @@ footer{
 
 }
 
+/* ================= PROJECTOR OPTIMIZATION ================= */
+/* V7 NEON PROPORTIONAL LAYOUT */
 
-
-
-
-
-/* ==========================
-   PROJECTOR 4K
-========================== */
-
-
-@media(min-width:2000px){
-
-
-
-header h1{
-
-
-    font-size:70px;
-
-
+header{
+    height:13vh;
+    padding:12px 35px;
 }
 
-
-
-.score{
-
-
-    font-size:350px;
-
-
+.title-area h1{
+    font-size:clamp(30px,3.5vw,60px);
+    letter-spacing:4px;
 }
 
+.title-area h2{
+    font-size:clamp(18px,1.8vw,32px);
+}
 
+.title-area p{
+    font-size:14px;
+    margin-top:3px;
+}
 
-table{
+.clock-box{
+    min-width:190px;
+    padding:12px 25px;
+}
 
+/* setting dibuat lebih compact */
+.setting-panel{
+    height:8vh;
+    gap:18px;
+}
 
+.setting-box{
+    padding:8px 18px;
+}
+
+/* area pertandingan */
+.score-container{
+    grid-template-columns:0.95fr 1.2fr 0.95fr;
+    gap:18px;
+    padding:15px 35px;
+}
+
+.team-box{
+    border-radius:25px;
+    padding:18px;
+}
+
+.team-box input{
+    padding:12px;
+    font-size:clamp(18px,1.8vw,32px);
+}
+
+.score-number{
+    font-size:clamp(100px,13vw,220px);
+}
+
+/* center scoreboard */
+.center-box{
+    padding:18px;
+}
+
+.center-box h2{
     font-size:30px;
-
-
+    margin:5px;
 }
 
+.set-display{
+    font-size:clamp(60px,6vw,110px);
+}
+
+#currentSet{
+    font-size:clamp(35px,4vw,70px);
+}
+
+#status{
+    font-size:20px;
+    padding:12px;
+}
+
+/* tabel neon lebih besar dan terbaca proyektor */
+.history-table{
+    margin-top:18px;
+    border-width:2px;
+}
+
+.history-table th{
+    padding:12px 10px;
+    font-size:clamp(16px,1.6vw,26px);
+}
+
+.history-table td{
+    padding:14px 10px;
+    font-size:clamp(16px,1.6vw,26px);
+}
+
+/* tombol */
+.button-group button{
+    padding:12px 22px;
+    font-size:18px;
+}
+
+.serve-indicator{
+    right:18px;
+    bottom:18px;
+    padding:10px 16px;
+    font-size:15px;
+}
+
+/* kontrol bawah */
+.control-panel{
+    height:7vh;
+}
+
+footer{
+    height:4vh;
+    font-size:16px;
+}
+
+
+/* Hilangkan ruang kosong besar */
+.team-box,
+.center-box{
+    min-height:0;
+}
+
+
+/* layar proyektor 16:9 */
+@media(min-width:1400px){
+    .score-container{
+        padding-left:40px;
+        padding-right:40px;
+    }
+}
+
+
+/* ================= WINDOWED MODE AUTO FIT ================= */
+/* Agar saat BUKAN full screen, layout tetap rapi dan proporsional */
+
+.match-screen{
+    min-height:100vh;
+}
+
+/* layar desktop biasa / jendela browser tidak fullscreen */
+@media (max-width:1700px){
+
+html, body{
+    overflow:hidden;
+}
+
+    .match-screen{
+        height:auto;
+        min-height:100vh;
+    }
+
+    header{
+        height:auto;
+        padding:10px 24px;
+        gap:18px;
+        flex-wrap:wrap;
+    }
+
+    .title-area{
+        flex:1 1 55%;
+        min-width:320px;
+    }
+
+    .title-area h1{
+        font-size:clamp(28px,3vw,54px);
+        line-height:1.05;
+        letter-spacing:3px;
+    }
+
+    .title-area h2{
+        font-size:clamp(16px,1.7vw,30px);
+        margin-top:6px;
+    }
+
+    .title-area p{
+        font-size:clamp(11px,0.95vw,16px);
+        line-height:1.2;
+        letter-spacing:1.5px;
+        margin-top:4px;
+        margin-bottom:0;
+    }
+
+    .clock-area{
+        flex:0 1 auto;
+        gap:14px;
+        margin-left:auto;
+    }
+
+    .clock-box{
+        min-width:160px;
+        padding:10px 20px;
+        border-radius:18px;
+    }
+
+    .clock-box strong{
+        font-size:clamp(22px,2.6vw,48px);
+    }
+
+    .setting-panel{
+        height:auto;
+        padding:10px 18px 6px;
+        gap:12px;
+        flex-wrap:wrap;
+    }
+
+    .setting-box{
+        padding:8px 14px;
+    }
+
+    .setting-box label{
+        font-size:12px;
+    }
+
+    .setting-box input,
+    .setting-box select{
+        font-size:16px;
+        padding:8px 10px;
+    }
+
+    .score-container{
+        grid-template-columns:0.95fr 1.12fr 0.95fr;
+        gap:14px;
+        padding:12px 20px 10px;
+        align-items:stretch;
+    }
+
+    .team-box,
+    .center-box{
+        min-height:520px;
+    }
+
+    .team-box{
+        padding:16px;
+        border-radius:24px;
+    }
+
+    .team-box input{
+        width:88%;
+        padding:11px 12px;
+        font-size:clamp(18px,1.6vw,30px);
+        border-radius:14px;
+    }
+
+    .score-number{
+        font-size:clamp(88px,11vw,190px);
+        line-height:1;
+    }
+
+    .serve-indicator{
+        right:16px;
+        bottom:16px;
+        padding:9px 14px;
+        font-size:14px;
+        border-radius:16px;
+    }
+
+    .button-group{
+        gap:8px;
+    }
+
+    .button-group button,
+    .control-panel button{
+        padding:11px 18px;
+        font-size:16px;
+        border-radius:13px;
+    }
+
+    .center-box{
+        padding:16px;
+        border-radius:24px;
+    }
+
+    .center-box h2{
+        font-size:clamp(24px,2.2vw,38px);
+        margin:4px 0 10px;
+    }
+
+    .set-display{
+        font-size:clamp(58px,6.2vw,105px);
+        line-height:1;
+    }
+
+    #currentSet{
+        font-size:clamp(30px,3.8vw,62px);
+        margin:8px 0 10px;
+        line-height:1;
+    }
+
+    #status{
+        font-size:clamp(18px,1.4vw,24px);
+        padding:11px;
+        margin-top:4px;
+    }
+
+    .history-table{
+        margin-top:16px;
+    }
+
+    .history-table th,
+    .history-table td{
+        padding:12px 8px;
+        font-size:clamp(15px,1.3vw,24px);
+    }
+
+    .control-panel{
+        height:auto;
+        padding:10px 0 8px;
+    }
+
+    footer{
+        height:auto;
+        padding:4px 12px 8px;
+        font-size:14px;
+        text-align:center;
+        flex-wrap:wrap;
+    }
+}
+
+/* jendela lebih kecil lagi tapi masih desktop */
+@media (max-width: 1450px){
+    .score-container{
+        grid-template-columns:1fr;
+        gap:12px;
+    }
+
+    .team-box,
+    .center-box{
+        min-height:auto;
+    }
+
+    .team-box{
+        min-height:380px;
+    }
+
+    .center-box{
+        min-height:unset;
+    }
+
+    .score-number{
+        font-size:clamp(82px,10vw,160px);
+    }
+
+    .button-group{
+        margin-top:8px;
+    }
+
+    .control-panel button{
+        margin-bottom:6px;
+    }
+}
+
+/* saat browser benar-benar fullscreen, tetap pakai mode panggung penuh */
+:fullscreen html,
+:fullscreen body{
+    overflow:hidden;
+}
+
+
+/* ================= BROWSER MAXIMIZE FIX V9 ================= */
+/* Stabil untuk mode browser maximize / windowed besar */
+
+:root{
+    --header-h: clamp(88px, 14vh, 132px);
+    --setting-h: clamp(64px, 8vh, 90px);
+    --control-h: clamp(54px, 7vh, 76px);
+    --footer-h: clamp(24px, 3.5vh, 36px);
+}
+
+html, body{
+    min-height:100%;
+}
+
+body{
+    overflow:auto;
+}
+
+.match-screen{
+    min-height:100vh;
+    height:auto;
+}
+
+/* layout utama lebih stabil untuk jendela browser */
+header{
+    min-height:var(--header-h);
+    height:auto;
+    padding:12px 28px;
+    gap:18px;
+    flex-wrap:nowrap;
+}
+
+.title-area{
+    flex:1 1 auto;
+    min-width:0;
+    overflow:hidden;
+}
+
+.title-area h1{
+    font-size:clamp(32px,4vw,68px);
+    line-height:1;
+    letter-spacing:3px;
+    margin-bottom:8px;
+    white-space:nowrap;
+}
+
+.title-area h2{
+    font-size:clamp(18px,2vw,34px);
+    line-height:1.08;
+    margin-bottom:6px;
+}
+
+.title-area p{
+    font-size:clamp(10px,0.95vw,16px);
+    line-height:1.1;
+    letter-spacing:1.5px;
+    white-space:normal;
+}
+
+.clock-area{
+    flex:0 0 auto;
+    display:flex;
+    gap:14px;
+    align-items:center;
+}
+
+.clock-box{
+    min-width:170px;
+    padding:10px 18px;
+    border-radius:18px;
+}
+
+.clock-box strong{
+    font-size:clamp(28px,3.2vw,52px);
+    line-height:1;
+}
+
+.setting-panel{
+    min-height:var(--setting-h);
+    height:auto;
+    padding:8px 18px;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.setting-box{
+    padding:8px 14px;
+}
+
+.setting-box input,
+.setting-box select{
+    font-size:16px;
+    padding:7px 10px;
+}
+
+/* tinggi area skor dihitung dari viewport supaya tidak mendorong layout */
+.score-container{
+    flex:0 0 auto;
+    min-height:0;
+    height:calc(100vh - var(--header-h) - var(--setting-h) - var(--control-h) - var(--footer-h) - 26px);
+    grid-template-columns:minmax(260px, 1fr) minmax(420px, 1.15fr) minmax(260px, 1fr);
+    gap:16px;
+    padding:12px 24px 8px;
+    align-items:stretch;
+}
+
+.team-box,
+.center-box{
+    min-height:0;
+    height:100%;
+    overflow:hidden;
+}
+
+.team-box{
+    padding:16px 14px 14px;
+    border-radius:24px;
+}
+
+.team-box input{
+    width:88%;
+    padding:10px 12px;
+    font-size:clamp(18px,1.9vw,32px);
+    border-radius:14px;
+    margin-bottom:8px;
+}
+
+.score-number{
+    flex:1 1 auto;
+    font-size:clamp(92px,11vw,210px);
+    line-height:0.9;
+}
+
+.serve-indicator{
+    right:14px;
+    bottom:14px;
+    padding:9px 14px;
+    font-size:13px;
+    border-radius:16px;
+}
+
+.button-group{
+    flex:0 0 auto;
+    gap:8px;
+    margin-top:8px;
+}
+
+.button-group button,
+.control-panel button{
+    padding:11px 18px;
+    font-size:16px;
+    border-radius:13px;
+}
+
+.center-box{
+    padding:16px 14px;
+    border-radius:24px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+}
+
+.center-box h2{
+    font-size:clamp(24px,2.4vw,40px);
+    line-height:1.05;
+    margin:4px 0 10px;
+}
+
+.set-display{
+    font-size:clamp(60px,6.5vw,118px);
+    line-height:0.95;
+    margin-bottom:8px;
+}
+
+#currentSet{
+    font-size:clamp(34px,4.1vw,72px);
+    line-height:1;
+    margin:4px 0 10px;
+}
+
+#status{
+    font-size:clamp(17px,1.35vw,24px);
+    padding:10px 12px;
+    border-radius:14px;
+    margin-top:2px;
+}
+
+.history-table{
+    margin-top:16px;
+}
+
+.history-table th,
+.history-table td{
+    padding:11px 8px;
+    font-size:clamp(15px,1.35vw,24px);
+}
+
+.control-panel{
+    min-height:var(--control-h);
+    height:auto;
+    padding:8px 0 6px;
+}
+
+footer{
+    min-height:var(--footer-h);
+    height:auto;
+    padding:2px 10px 6px;
+    font-size:14px;
+    line-height:1.2;
+}
+
+/* Lebar browser sedang */
+@media (max-width: 1600px){
+    .score-container{
+        grid-template-columns:minmax(240px, 0.95fr) minmax(390px, 1.1fr) minmax(240px, 0.95fr);
+        gap:14px;
+    }
+
+    .title-area h1{
+        font-size:clamp(30px,3.5vw,58px);
+    }
+
+    .clock-box{
+        min-width:155px;
+    }
+
+    .score-number{
+        font-size:clamp(84px,10vw,180px);
+    }
+}
+
+/* Tinggi layar laptop umum 768-900 agar tidak overflow */
+@media (max-height: 920px){
+    :root{
+        --header-h: clamp(84px, 12.5vh, 116px);
+        --setting-h: clamp(58px, 7vh, 78px);
+        --control-h: clamp(50px, 6vh, 68px);
+        --footer-h: clamp(22px, 3vh, 32px);
+    }
+
+    header{
+        padding:10px 24px;
+    }
+
+    .title-area h1{
+        font-size:clamp(28px,3.5vw,54px);
+        margin-bottom:6px;
+    }
+
+    .title-area h2{
+        font-size:clamp(16px,1.75vw,28px);
+        margin-bottom:4px;
+    }
+
+    .clock-box{
+        padding:8px 16px;
+    }
+
+    .clock-box strong{
+        font-size:clamp(24px,2.7vw,42px);
+    }
+
+    .setting-panel{
+        padding:6px 16px;
+    }
+
+    .score-container{
+        gap:12px;
+        padding:10px 20px 6px;
+    }
+
+    .team-box,
+    .center-box{
+        border-radius:22px;
+    }
+
+    .score-number{
+        font-size:clamp(78px,9vw,160px);
+    }
+
+    .center-box h2{
+        font-size:clamp(22px,2vw,34px);
+        margin-bottom:8px;
+    }
+
+    .set-display{
+        font-size:clamp(54px,5.6vw,96px);
+    }
+
+    #currentSet{
+        font-size:clamp(30px,3.4vw,56px);
+        margin-bottom:8px;
+    }
+
+    #status{
+        font-size:clamp(16px,1.15vw,21px);
+        padding:9px 10px;
+    }
+
+    .history-table{
+        margin-top:12px;
+    }
+
+    .history-table th,
+    .history-table td{
+        padding:9px 7px;
+        font-size:clamp(14px,1.15vw,20px);
+    }
+
+    .button-group button,
+    .control-panel button{
+        padding:10px 16px;
+        font-size:15px;
+    }
+
+    footer{
+        font-size:13px;
+    }
+}
+
+/* Tablet / jendela diperkecil: ubah ke 1 kolom agar tetap rapi */
+@media (max-width: 1280px){
+    header{
+        flex-wrap:wrap;
+    }
+
+    .clock-area{
+        width:100%;
+        justify-content:flex-start;
+    }
+
+    .score-container{
+        height:auto;
+        grid-template-columns:1fr;
+    }
+
+    .team-box,
+    .center-box{
+        height:auto;
+        overflow:visible;
+    }
+
+    .team-box{
+        min-height:350px;
+    }
+}
+
+/* Fullscreen browser/proyektor: pakai panggung penuh lagi */
+@media (display-mode: fullscreen){
+    body{
+        overflow:hidden;
+    }
+
+    .match-screen{
+        height:100vh;
+        min-height:100vh;
+    }
+
+    .score-container{
+        height:calc(100vh - var(--header-h) - var(--setting-h) - var(--control-h) - var(--footer-h) - 20px);
+    }
+}
+
+/* ===============================
+   FINAL NO SCROLLBAR FIX
+   SEKARDANGAN CUP SCOREBOARD
+================================ */
+
+html,
+body{
+    width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+    overflow:hidden !important;
+}
+
+
+*{
+    max-width:100%;
+}
+
+
+.match-screen{
+    width:100%;
+    height:100vh;
+    overflow:hidden;
+}
+
+
+/* cegah grid melebar */
+.score-container{
+    width:100%;
+    max-width:100vw;
+    overflow:hidden;
+}
+
+
+/* cegah box mendorong layar */
+.team-box,
+.center-box{
+    min-width:0;
+}
+
+
+/* hilangkan efek padding keluar viewport */
+header,
+.setting-panel,
+.control-panel,
+footer{
+    max-width:100vw;
+    overflow:hidden;
+}
+
+
+/* layar browser biasa */
+@media(max-width:1700px){
+
+    html,
+    body{
+        overflow:hidden !important;
+    }
+
+    .match-screen{
+        height:100vh;
+    }
 
 }
