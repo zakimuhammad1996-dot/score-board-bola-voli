@@ -8,12 +8,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>
-SEKARDANGAN CUP VOLLEYBALL PRO MATCH SYSTEM
+SEKARDANGAN CUP VOLLEYBALL SCOREBOARD V6
 </title>
+
 
 <link rel="stylesheet" href="style.css">
 
+
 </head>
+
 
 
 <body>
@@ -22,239 +25,161 @@ SEKARDANGAN CUP VOLLEYBALL PRO MATCH SYSTEM
 <div class="match-screen">
 
 
+
+<!-- ================= HEADER ================= -->
+
+
 <header>
 
+
+<div class="title-area">
+
 <h1>
-SEKARDANGAN CUP - VOLI KEBER PRIA
+SEKARDANGAN CUP
 </h1>
+
+
+<h2>
+VOLI KEBER PRIA
+</h2>
+
 
 <p>
 DALAM RANGKA HUT KE-81 KEMERDEKAAN REPUBLIK INDONESIA
 </p>
 
+
+</div>
+
+
+
+
+
+<div class="clock-area">
+
+
+<div class="clock-box">
+
+<span>
+JAM
+</span>
+
+<strong id="clock">
+00:00:00
+</strong>
+
+</div>
+
+
+
+<div class="clock-box">
+
+<span>
+MATCH TIME
+</span>
+
+<strong id="timer">
+00:00:00
+</strong>
+
+</div>
+
+
+</div>
+
+
 </header>
 
 
 
-<section class="score-area">
 
 
 
-<!-- =====================
-     TIM A
-===================== -->
+
+<!-- ================= SETTING ================= -->
 
 
-<div class="team-wrapper">
+<section class="setting-panel">
 
 
-<div class="team-card team-a">
+
+<div class="setting-box">
+
+
+<label>
+BEST OF SET
+</label>
+
+
+<select id="bestOf">
+
+<option value="1">
+BEST OF 1
+</option>
+
+
+<option value="3" selected>
+BEST OF 3
+</option>
+
+
+<option value="5">
+BEST OF 5
+</option>
+
+
+</select>
+
+
+</div>
+
+
+
+
+
+<div class="setting-box">
+
+
+<label>
+POINT / SET
+</label>
 
 
 <input 
-id="teamA"
-value="TIM MERAH"
-oninput="update()"
+type="number"
+id="pointTarget"
+value="25"
 >
 
 
-<div 
-class="score"
-id="scoreA">
-0
-</div>
-
-
-</div>
-
-
-
-<div class="button-area">
-
-<button onclick="point('A')">
-+ POINT
-</button>
-
-
-<button onclick="minus('A')">
-−
-</button>
-
-
-</div>
-
-
 </div>
 
 
 
 
 
+<div class="setting-box">
 
 
-<!-- =====================
-     REKAP TENGAH
-===================== -->
+<label>
+DEUCE
+</label>
 
 
-<div class="center">
+<select id="deuce">
 
 
-<h2>
-HASIL PERTANDINGAN
-</h2>
+<option value="yes">
+AKTIF
+</option>
 
 
+<option value="no">
+NON AKTIF
+</option>
 
-<table>
 
-
-<thead>
-
-<tr>
-
-<th>
-SET
-</th>
-
-
-<th id="headA">
-TIM MERAH
-</th>
-
-
-<th id="headB">
-TIM PUTIH
-</th>
-
-
-<th>
-PEMENANG
-</th>
-
-
-</tr>
-
-</thead>
-
-
-
-<tbody id="history">
-
-
-<tr>
-
-<td colspan="4">
-Belum ada set
-</td>
-
-
-</tr>
-
-
-</tbody>
-
-
-</table>
-
-
-
-
-
-<h3 id="currentSet">
-
-SET 1
-</h3>
-
-
-
-<div class="match-score">
-
-
-<span id="setA">
-0
-</span>
-
-
--
-
-<span id="setB">
-0
-</span>
-
-
-</div>
-
-
-
-<div class="status"
-id="statusMatch">
-
-NORMAL PLAY
-
-</div>
-
-
-
-</div>
-
-
-
-
-
-
-
-
-
-<!-- =====================
-     TIM B
-===================== -->
-
-
-<div class="team-wrapper">
-
-
-<div class="team-card team-b">
-
-
-<input 
-id="teamB"
-value="TIM PUTIH"
-oninput="update()"
->
-
-
-
-<div 
-class="score"
-id="scoreB">
-
-0
-
-</div>
-
-
-
-</div>
-
-
-
-
-<div class="button-area">
-
-
-<button onclick="point('B')">
-+ POINT
-</button>
-
-
-<button onclick="minus('B')">
-−
-</button>
-
-
-
-</div>
+</select>
 
 
 </div>
@@ -269,15 +194,242 @@ id="scoreB">
 
 
 
-<!-- =====================
-CONTROL
-===================== -->
 
 
-<div class="control-panel">
+<!-- ================= SCORE AREA ================= -->
 
 
-<button onclick="switchCourt()">
+<section class="score-container">
+
+
+
+
+
+<!-- TEAM KIRI -->
+
+
+<div class="team-box red-team">
+
+
+<input
+id="teamLeft"
+value="TIM MERAH"
+>
+
+
+<div class="score-number"
+id="scoreLeft">
+
+0
+
+</div>
+
+
+
+
+<div class="serve-indicator"
+id="serveLeft">
+
+● SERVIS
+
+</div>
+
+
+
+<div class="button-group">
+
+<button onclick="addPoint('left')">
+
++ POINT
+
+</button>
+
+
+<button onclick="minusPoint('left')">
+
+−
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- CENTER PANEL -->
+
+
+<div class="center-box">
+
+
+<h2>
+HASIL PERTANDINGAN
+</h2>
+
+
+
+<div class="set-display">
+
+
+<span id="setLeft">
+
+0
+
+</span>
+
+
+-
+
+<span id="setRight">
+
+0
+
+</span>
+
+
+</div>
+
+
+
+
+<h1 id="currentSet">
+
+SET 1
+
+</h1>
+
+
+
+
+
+<div id="status">
+
+NORMAL PLAY
+
+</div>
+
+
+
+
+
+
+<!-- MATRIX SCORE -->
+
+<table 
+id="historyTable"
+class="history-table">
+
+
+</table>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<!-- TEAM KANAN -->
+
+
+
+<div class="team-box blue-team">
+
+
+
+<input
+id="teamRight"
+value="TIM PUTIH"
+>
+
+
+
+<div class="score-number"
+id="scoreRight">
+
+0
+
+</div>
+
+
+
+
+
+<div class="serve-indicator"
+id="serveRight">
+
+● SERVIS
+
+</div>
+
+
+
+
+
+<div class="button-group">
+
+
+<button onclick="addPoint('right')">
+
++ POINT
+
+</button>
+
+
+<button onclick="minusPoint('right')">
+
+−
+
+</button>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ================= CONTROL ================= -->
+
+
+
+<section class="control-panel">
+
+
+<button onclick="switchSide()">
 
 🔄 TUKAR POSISI
 
@@ -287,10 +439,9 @@ CONTROL
 
 <button onclick="resetMatch()">
 
-⟳ RESET MATCH
+⟳ RESET
 
 </button>
-
 
 
 
@@ -302,7 +453,7 @@ CONTROL
 
 
 
-</div>
+</section>
 
 
 
@@ -312,12 +463,13 @@ CONTROL
 
 <footer>
 
-
-BEST OF 3 SET  
+← Point Kiri
 |
-SET 1-3 = 25 POINT  
+→ Point Kanan
 |
-DEUCE SYSTEM | SELAMAT BERTANDING | SEKARDANGAN BERSATU
+F Fullscreen
+|
+R Reset
 
 
 </footer>
@@ -328,9 +480,15 @@ DEUCE SYSTEM | SELAMAT BERTANDING | SEKARDANGAN BERSATU
 
 
 
+
+
+
+
 <script src="app.js"></script>
 
 
+
 </body>
+
 
 </html>
