@@ -1,47 +1,411 @@
-let scoreA = 0;
-let scoreB = 0;
-
-let setA = 0;
-let setB = 0;
-
-let currentSet = 1;
-
-let history = [];
-
-let servingTeam = "";
+// ========================================
+// SEKARDANGAN CUP VOLLEYBALL SCOREBOARD V6
+// MATCH ENGINE + BUZZER SOUND SYSTEM
+// ========================================
 
 
+// ========================================
+// DATA TEAM
+// ========================================
 
-/*
-====================================
- TAMBAH POINT
-====================================
-*/
+let teams = {
 
-function point(team){
+    A:{
+        name:"TIM MERAH",
+        score:0,
+        set:0
+    },
 
-    if(team === "A"){
 
-        scoreA++;
+    B:{
+        name:"TIM PUTIH",
+        score:0,
+        set:0
+    }
 
-        servingTeam =
-        document.getElementById("teamA").value;
+};
+
+
+
+// ========================================
+// POSISI LAPANGAN
+// ========================================
+
+let sideMap={
+
+    left:"A",
+    right:"B"
+
+};
+
+
+
+// ========================================
+// MATCH CONFIG
+// ========================================
+
+let currentSet=1;
+
+let history=[];
+
+let servingTeam="";
+
+
+let bestOf=3;
+
+let pointTarget=25;
+
+let deuce=true;
+
+
+
+// ========================================
+// TIMER
+// ========================================
+
+let matchTime=0;
+
+let timer=null;
+
+let matchStarted=false;
+
+let matchFinished=false;
+
+
+
+
+
+// ========================================
+// 🔊 BUZZER AUDIO ENGINE
+// ========================================
+
+
+const audioCtx =
+new (window.AudioContext || window.webkitAudioContext)();
+
+
+
+function buzzer(type="point"){
+
+
+    if(audioCtx.state==="suspended"){
+
+        audioCtx.resume();
 
     }
 
-    else{
 
-        scoreB++;
+    let osc =
+    audioCtx.createOscillator();
 
-        servingTeam =
-        document.getElementById("teamB").value;
+
+    let gain =
+    audioCtx.createGain();
+
+
+
+    osc.connect(gain);
+
+    gain.connect(audioCtx.destination);
+
+
+
+    if(type==="point"){
+
+
+        osc.frequency.value=900;
+
+        gain.gain.value=0.15;
+
+
+        osc.start();
+
+
+        setTimeout(()=>{
+
+            osc.stop();
+
+        },120);
+
 
     }
+
+
+
+
+
+    if(type==="set"){
+
+
+        osc.frequency.value=600;
+
+        gain.gain.value=0.25;
+
+
+        osc.start();
+
+
+
+        setTimeout(()=>{
+
+            osc.frequency.value=900;
+
+        },200);
+
+
+
+        setTimeout(()=>{
+
+            osc.stop();
+
+        },600);
+
+
+
+    }
+
+
+
+
+
+    if(type==="win"){
+
+
+        osc.frequency.value=500;
+
+        gain.gain.value=0.3;
+
+
+        osc.start();
+
+
+
+        setTimeout(()=>{
+
+            osc.frequency.value=800;
+
+        },300);
+
+
+
+        setTimeout(()=>{
+
+            osc.frequency.value=1200;
+
+        },600);
+
+
+
+        setTimeout(()=>{
+
+            osc.stop();
+
+        },1300);
+
+
+
+    }
+
+
+}
+
+
+
+
+
+// ========================================
+// CLOCK REALTIME
+// ========================================
+
+
+setInterval(()=>{
+
+
+    let now=new Date();
+
+
+    document.getElementById("clock")
+    .innerHTML=
+
+    now.toLocaleTimeString(
+        "id-ID",
+        {
+            hour12:false
+        }
+    );
+
+
+},1000);
+
+
+
+
+
+// ========================================
+// TIMER MATCH
+// ========================================
+
+
+function startTimer(){
+
+
+    if(timer)
+        return;
+
+
+
+    timer=setInterval(()=>{
+
+
+        matchTime++;
+
+
+
+        let h=
+
+        String(
+            Math.floor(matchTime/3600)
+        )
+
+        .padStart(2,"0");
+
+
+
+
+        let m=
+
+        String(
+            Math.floor(
+                (matchTime%3600)/60
+            )
+        )
+
+        .padStart(2,"0");
+
+
+
+
+        let s=
+
+        String(
+            matchTime%60
+        )
+
+        .padStart(2,"0");
+
+
+
+
+        document.getElementById("timer")
+        .innerHTML=
+
+        `${h}:${m}:${s}`;
+
+
+
+    },1000);
+
+
+
+}
+
+
+
+
+
+function stopTimer(){
+
+
+    clearInterval(timer);
+
+    timer=null;
+
+}
+
+// ========================================
+// HELPER
+// ========================================
+
+
+function getTeam(side){
+
+
+    return teams[
+        sideMap[side]
+    ];
+
+}
+
+
+
+
+function getSetsToWin(){
+
+
+    return Math.ceil(
+        bestOf/2
+    );
+
+}
+
+
+
+
+
+
+
+// ========================================
+// TAMBAH POINT
+// ========================================
+
+
+function addPoint(side){
+
+
+    if(matchFinished)
+        return;
+
+
+
+    let key =
+    sideMap[side];
+
+
+
+    teams[key].score++;
+
+
+
+    // 🔊 bunyi point
+
+    buzzer("point");
+
+
+
+    // update servis
+
+    servingTeam=key;
+
+
+
+    if(!matchStarted){
+
+
+        matchStarted=true;
+
+
+        startTimer();
+
+
+    }
+
 
 
     checkSet();
 
+
     update();
+
 
 }
 
@@ -49,93 +413,35 @@ function point(team){
 
 
 
-/*
-====================================
- KURANG POINT
-====================================
-*/
-
-function minus(team){
 
 
-    if(team === "A" && scoreA > 0){
+// ========================================
+// KURANG POINT
+// ========================================
 
-        scoreA--;
 
-    }
+function minusPoint(side){
 
 
 
-    if(team === "B" && scoreB > 0){
-
-        scoreB--;
-
-    }
-
-
-    update();
-
-}
-
-
-
-
-
-/*
-====================================
- STATUS MATCH
-====================================
-*/
-
-function checkStatus(){
-
-
-    let status="NORMAL PLAY";
-
-
-    if(servingTeam !== ""){
-
-        status =
-        servingTeam + " SERVIS";
-
-    }
-
-
-
-    if(scoreA==24 && scoreB<=23){
-
-        status =
-        document.getElementById("teamA").value
-        +" SET POINT";
-
-    }
-
-
-
-    if(scoreB==24 && scoreA<=23){
-
-        status =
-        document.getElementById("teamB").value
-        +" SET POINT";
-
-    }
+    let key =
+    sideMap[side];
 
 
 
     if(
-        (setA==2 && scoreA>=23)
-        ||
-        (setB==2 && scoreB>=23)
+        teams[key].score>0
     ){
 
-        status="MATCH POINT";
+
+        teams[key].score--;
+
 
     }
 
 
 
-    document.getElementById("statusMatch")
-    .innerHTML=status;
+    update();
 
 
 }
@@ -144,80 +450,117 @@ function checkStatus(){
 
 
 
-/*
-====================================
- CEK SET
- BEST OF 3
- 25 POINT
- DEUCE SYSTEM
-====================================
-*/
+
+
+
+
+// ========================================
+// CEK SET
+// ========================================
+
 
 function checkSet(){
 
 
-    let target = 25;
+
+    let A =
+    teams.A.score;
+
+
+    let B =
+    teams.B.score;
 
 
 
-    if(
 
-        (scoreA >= target ||
-        scoreB >= target)
-
-        &&
-
-        Math.abs(scoreA-scoreB)>=2
-
-    ){
-
-
-        let winner="";
+    let winner=null;
 
 
 
-        if(scoreA > scoreB){
 
 
-            setA++;
+    // MODE DEUCE AKTIF
+
+    if(deuce){
+
+
+
+        if(
+
+            (A>=pointTarget ||
+            B>=pointTarget)
+
+            &&
+
+            Math.abs(A-B)>=2
+
+        ){
+
 
             winner =
-            document.getElementById("teamA").value;
+            A>B ? "A":"B";
 
 
         }
 
-        else{
+
+    }
 
 
-            setB++;
+
+
+
+    // MODE NORMAL
+
+    else{
+
+
+        if(
+
+            A>=pointTarget ||
+            B>=pointTarget
+
+        ){
+
 
             winner =
-            document.getElementById("teamB").value;
+            A>B ? "A":"B";
 
 
         }
+
+
+    }
+
+
+
+
+
+
+
+    if(winner){
+
+
+
+        // 🔊 BUZZER SET SELESAI
+
+        buzzer("set");
+
 
 
 
         history.push({
 
+
             set:currentSet,
 
-            teamA:
-            document.getElementById("teamA").value,
+
+            A:
+            teams.A.score,
 
 
-            teamB:
-            document.getElementById("teamB").value,
-
-
-            a:scoreA,
-
-            b:scoreB,
-
-
-            winner:winner
+            B:
+            teams.B.score
 
 
         });
@@ -226,42 +569,82 @@ function checkSet(){
 
 
 
-        scoreA=0;
-
-        scoreB=0;
+        teams[winner].set++;
 
 
 
-        currentSet++;
+
+
+        teams.A.score=0;
+
+
+        teams.B.score=0;
 
 
 
-        if(setA==2 || setB==2){
+
+        servingTeam=winner;
+
+
+
+
+
+
+        // CEK PEMENANG MATCH
+
+
+        if(
+
+            teams[winner].set >=
+            getSetsToWin()
+
+        ){
+
+
+
+            matchFinished=true;
+
+
+
+            stopTimer();
+
+
+
+            // 🔊 BUZZER JUARA
+
+            buzzer("win");
+
 
 
             setTimeout(()=>{
 
 
-                let champion =
-                setA==2
-
-                ?
-
-                document.getElementById("teamA").value
-
-                :
-
-                document.getElementById("teamB").value;
-
-
-
                 alert(
-                "PEMENANG : "+champion
+
+                    "PEMENANG : "
+
+                    +
+
+                    teams[winner].name
+
                 );
 
 
-            },300);
 
+            },200);
+
+
+
+        }
+
+
+
+
+
+        else{
+
+
+            currentSet++;
 
 
         }
@@ -281,43 +664,87 @@ function checkSet(){
 
 
 
-/*
-====================================
- UPDATE TAMPILAN
-====================================
-*/
+
+// ========================================
+// UPDATE TAMPILAN
+// ========================================
 
 
 function update(){
 
 
 
-    document.getElementById("scoreA")
-    .innerHTML=scoreA;
+    let left =
+    getTeam("left");
+
+
+    let right =
+    getTeam("right");
 
 
 
-    document.getElementById("scoreB")
-    .innerHTML=scoreB;
+
+
+    document.getElementById("teamLeft")
+    .value =
+
+    left.name;
 
 
 
 
 
-    document.getElementById("setA")
-    .innerHTML=setA;
+    document.getElementById("teamRight")
+    .value =
+
+    right.name;
 
 
 
-    document.getElementById("setB")
-    .innerHTML=setB;
+
+
+
+
+    document.getElementById("scoreLeft")
+    .innerHTML =
+
+    left.score;
+
+
+
+
+
+    document.getElementById("scoreRight")
+    .innerHTML =
+
+    right.score;
+
+
+
+
+
+
+    document.getElementById("setLeft")
+    .innerHTML =
+
+    left.set;
+
+
+
+
+
+    document.getElementById("setRight")
+    .innerHTML =
+
+    right.set;
+
 
 
 
 
 
     document.getElementById("currentSet")
-    .innerHTML=
+    .innerHTML =
 
     "SET "+currentSet;
 
@@ -325,29 +752,166 @@ function update(){
 
 
 
-    document.getElementById("headA")
-    .innerHTML=
 
-    document.getElementById("teamA")
-    .value;
+    updateServe();
 
 
-
-
-    document.getElementById("headB")
-    .innerHTML=
-
-    document.getElementById("teamB")
-    .value;
-
+    updateStatus();
 
 
     renderHistory();
 
 
 
-    checkStatus();
+}
 
+// ========================================
+// INDIKATOR SERVIS
+// ========================================
+
+
+function updateServe(){
+
+
+    document
+    .getElementById("serveLeft")
+    .classList
+    .remove("active");
+
+
+
+    document
+    .getElementById("serveRight")
+    .classList
+    .remove("active");
+
+
+
+
+    if(
+        servingTeam===sideMap.left
+    ){
+
+
+        document
+        .getElementById("serveLeft")
+        .classList
+        .add("active");
+
+
+    }
+
+
+
+
+
+    if(
+        servingTeam===sideMap.right
+    ){
+
+
+        document
+        .getElementById("serveRight")
+        .classList
+        .add("active");
+
+
+    }
+
+
+}
+
+
+
+
+
+
+
+
+// ========================================
+// STATUS MATCH
+// ========================================
+
+
+function updateStatus(){
+
+
+    let text =
+    "NORMAL PLAY";
+
+
+
+    if(servingTeam){
+
+
+        text =
+
+        teams[servingTeam].name
+
+        +
+
+        " SERVIS";
+
+
+    }
+
+
+
+
+    if(
+        teams.A.score===pointTarget-1
+    ){
+
+
+        text =
+
+        teams.A.name
+
+        +
+
+        " SET POINT";
+
+
+    }
+
+
+
+
+
+    if(
+        teams.B.score===pointTarget-1
+    ){
+
+
+        text =
+
+        teams.B.name
+
+        +
+
+        " SET POINT";
+
+
+    }
+
+
+
+
+
+    if(matchFinished){
+
+
+        text="MATCH SELESAI";
+
+
+    }
+
+
+
+
+    document
+    .getElementById("status")
+    .innerHTML=text;
 
 
 }
@@ -360,82 +924,100 @@ function update(){
 
 
 
-/*
-====================================
- REKAP HASIL SET
-====================================
-*/
+// ========================================
+// TABEL REKAP SET
+// ========================================
+
 
 function renderHistory(){
-
 
 
     let html="";
 
 
 
-    history.forEach((x)=>{
+    html+=`
+
+    <tr>
+
+    <th>TIM</th>
+
+    `;
+
+
+
+    for(
+        let i=1;
+        i<=bestOf;
+        i++
+    ){
+
+
+        html+=`
+
+        <th>
+        SET ${i}
+        </th>
+
+        `;
+
+
+    }
+
+
+    html+=`
+
+    </tr>
+
+    `;
+
+
+
+
+
+
+    // TEAM A
+
+
+    html+=`
+
+    <tr>
+
+    <td>
+    ${teams.A.name}
+    </td>
+
+    `;
+
+
+
+    for(
+        let i=1;
+        i<=bestOf;
+        i++
+    ){
+
+
+        let data =
+        history.find(
+            x=>x.set===i
+        );
 
 
 
         html+=`
 
-
-        <tr>
-
-
         <td>
-        SET ${x.set}
-        </td>
 
-
-
-        <td>
-        ${x.a}
-        </td>
-
-
-
-        <td>
-        ${x.b}
-        </td>
-
-
-
-        <td>
-        ${x.winner}
-        </td>
-
-
-
-        </tr>
-
-
-        `;
-
-
-
-    });
-
-
-
-
-
-    if(html===""){
-
-
-
-        html=`
-
-        <tr>
-
-        <td colspan="4">
-
-        Belum ada set
+        ${
+            data
+            ?
+            data.A
+            :
+            ""
+        }
 
         </td>
-
-        </tr>
 
         `;
 
@@ -443,14 +1025,81 @@ function renderHistory(){
     }
 
 
+    html+=`
+
+    </tr>
+
+    `;
 
 
 
-    document.getElementById("history")
+
+
+
+    // TEAM B
+
+
+    html+=`
+
+    <tr>
+
+    <td>
+    ${teams.B.name}
+    </td>
+
+    `;
+
+
+
+    for(
+        let i=1;
+        i<=bestOf;
+        i++
+    ){
+
+
+        let data =
+        history.find(
+            x=>x.set===i
+        );
+
+
+
+        html+=`
+
+        <td>
+
+        ${
+            data
+            ?
+            data.B
+            :
+            ""
+        }
+
+        </td>
+
+        `;
+
+
+    }
+
+
+    html+=`
+
+    </tr>
+
+    `;
+
+
+
+
+
+    document
+    .getElementById("historyTable")
     .innerHTML=html;
 
 
-
 }
 
 
@@ -461,42 +1110,30 @@ function renderHistory(){
 
 
 
-
-/*
-====================================
- TUKAR POSISI LAPANGAN
-====================================
-*/
+// ========================================
+// TUKAR POSISI
+// ========================================
 
 
-function switchCourt(){
+function switchSide(){
 
 
-
-    let area =
-    document.querySelector(".score-area");
+    let temp =
+    sideMap.left;
 
 
 
-    let left =
-    area.children[0];
+    sideMap.left =
+    sideMap.right;
 
 
 
-    let right =
-    area.children[2];
+    sideMap.right =
+    temp;
 
 
 
-    area.insertBefore(
-        right,
-        left
-    );
-
-
-
-    area.appendChild(left);
-
+    update();
 
 
 }
@@ -509,29 +1146,224 @@ function switchCourt(){
 
 
 
-/*
-====================================
- FULL SCREEN
-====================================
-*/
+// ========================================
+// SETTING
+// ========================================
+
+
+document
+.getElementById("bestOf")
+.addEventListener(
+"change",
+()=>{
+
+
+bestOf =
+
+parseInt(
+document.getElementById("bestOf").value
+);
+
+
+update();
+
+
+});
+
+
+
+
+
+
+
+document
+.getElementById("pointTarget")
+.addEventListener(
+"change",
+()=>{
+
+
+pointTarget =
+
+parseInt(
+document.getElementById("pointTarget").value
+);
+
+
+});
+
+
+
+
+
+
+
+
+document
+.getElementById("deuce")
+.addEventListener(
+"change",
+()=>{
+
+
+deuce =
+
+document.getElementById("deuce")
+.value==="yes";
+
+
+});
+
+
+
+
+
+
+
+
+
+// ========================================
+// NAMA TEAM
+// ========================================
+
+
+document
+.getElementById("teamLeft")
+.addEventListener(
+"input",
+(e)=>{
+
+
+let key =
+sideMap.left;
+
+
+
+teams[key].name =
+
+e.target.value.toUpperCase();
+
+
+
+update();
+
+
+});
+
+
+
+
+
+
+
+document
+.getElementById("teamRight")
+.addEventListener(
+"input",
+(e)=>{
+
+
+let key =
+sideMap.right;
+
+
+
+teams[key].name =
+
+e.target.value.toUpperCase();
+
+
+
+update();
+
+
+});
+
+
+
+
+
+
+
+
+
+// ========================================
+// KEYBOARD CONTROL
+// ========================================
+
+
+document
+.addEventListener(
+"keydown",
+(e)=>{
+
+
+    if(e.key==="ArrowLeft"){
+
+        addPoint("left");
+
+    }
+
+
+
+
+    if(e.key==="ArrowRight"){
+
+        addPoint("right");
+
+    }
+
+
+
+
+
+
+    if(
+        e.key==="f" ||
+        e.key==="F"
+    ){
+
+        fullscreen();
+
+    }
+
+
+
+
+
+
+    if(
+        e.key==="r" ||
+        e.key==="R"
+    ){
+
+        resetMatch();
+
+    }
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ========================================
+// FULLSCREEN
+// ========================================
 
 
 function fullscreen(){
 
 
-
-    let element=document.documentElement;
-
-
-
-    if(element.requestFullscreen){
-
-
-        element.requestFullscreen();
-
-
-    }
-
+    document
+    .documentElement
+    .requestFullscreen();
 
 
 }
@@ -544,48 +1376,79 @@ function fullscreen(){
 
 
 
-
-/*
-====================================
- RESET MATCH
-====================================
-*/
+// ========================================
+// RESET MATCH
+// ========================================
 
 
 function resetMatch(){
 
 
 
-    if(confirm(
-    "Reset pertandingan?"
-    )){
+if(
+!confirm(
+"RESET MATCH?"
+)
+
+)
+
+return;
 
 
 
-        scoreA=0;
-
-        scoreB=0;
 
 
-        setA=0;
-
-        setB=0;
+teams.A.score=0;
 
 
-        currentSet=1;
-
-
-        history=[];
-
-
-        servingTeam="";
-
-
-        update();
+teams.B.score=0;
 
 
 
-    }
+teams.A.set=0;
+
+
+teams.B.set=0;
+
+
+
+currentSet=1;
+
+
+
+history=[];
+
+
+
+servingTeam="";
+
+
+
+matchFinished=false;
+
+
+
+matchStarted=false;
+
+
+
+matchTime=0;
+
+
+
+stopTimer();
+
+
+
+
+document
+.getElementById("timer")
+.innerHTML="00:00:00";
+
+
+
+update();
+
 
 
 }
@@ -597,11 +1460,10 @@ function resetMatch(){
 
 
 
-/*
-====================================
- LOAD AWAL
-====================================
-*/
+
+// ========================================
+// INIT
+// ========================================
 
 
 update();
